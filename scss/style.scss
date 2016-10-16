@@ -1,0 +1,310 @@
+@import "compass/css3";
+
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,900);
+
+$shadowBaseColor:#7BB57A;
+
+html { 
+  background: #000 url(http://s29.postimg.org/k8qnunik5/aurora_borealis_nature_hd_wallpaper_1920x1200_10.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  height: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif; 
+  font-weight: 300;
+  height: 100%;
+  @include display-flex();
+  @include align-items(center);
+  @include justify-content(center);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #ddd;
+  text-shadow: inset -1px -1px 2px rgba(#fff, 1), 2px 2px 2px rgba($shadowBaseColor, .5);
+}
+i {
+  color: #c5c7c7;
+  font-style: normal;
+  cursor: pointer;
+}
+
+i:before, .title, .timeDisplay {
+  text-shadow: inset -1px -1px 2px rgba(#fff, 1), 1px 1px 1px rgba(#000, .5);
+}
+
+.coolVideo {
+  @include display-flex();
+  @include justify-content(space-between);
+}
+
+.wrapper {
+  position: relative;
+  min-width: 300px;
+    
+  &:before {
+    z-index: -1;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 50px 50px 100px rgba($shadowBaseColor, .1);
+  }
+  &:after {
+    z-index: -1;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 1px;
+    top: 0;
+    left: 0;
+    background: rgba($shadowBaseColor, 0.5);
+  }
+  /* @include transform(rotate(-15deg)); */
+}
+
+.video {
+  position: relative;
+  box-shadow: 0 10px 30px rgba($shadowBaseColor, 0.5);
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  &:before {
+    box-shadow: -50px 50px 100px rgba($shadowBaseColor, .3);
+  }
+  &:after {
+    box-shadow: -10px 10px 50px rgba($shadowBaseColor, .3);
+  }
+}
+
+video {
+  max-width: 100%;
+  max-height: 70vh;
+  min-width: 300px;
+  @media only screen and (min-width : 768px) {
+    width: 680px;
+    height: 280px;
+  }
+  background: url(http://demosthenes.info/assets/images/nambia1.jpg) no-repeat center center;
+  background-size: cover;
+  margin-bottom: -4px;
+}
+
+.top, .bottom {
+  @include display-flex();
+  @include justify-content(space-between);
+}
+.top {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  div {
+    @include background(linear-gradient(to bottom, rgba(#000,0) 0%, rgba(#000,0.2) 51%, rgba(#000,0.9) 100%));
+    position: relative;
+    text-align: center;
+    &:after {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 100%;
+      @include background(linear-gradient(to bottom, rgba(#393a3c,0) 0%, rgba(#393a3c,0.1) 1%, rgba(#393a3c,0.5) 100%));
+    }
+    &:nth-of-type(1) {
+      &:after {
+        right: -1px;
+      }
+    }
+    &:nth-of-type(2) {
+      &:after {
+        left: -1px;
+      }
+    }
+  }
+}
+
+.top div, .bottom .prev, .bottom .next {
+  height: 70px;
+  @include flex(0 0 70px);
+  i {
+    &:hover:before {
+      color: #fff;
+    }
+    &:before {
+      @include transition(color 0.2s linear);
+      line-height: 70px;
+      font-size: 20px;
+    }
+  }
+}
+
+.bottom {
+  box-shadow: 0 10px 8px -8px rgba($shadowBaseColor, .5);
+  > div {
+    @include background(linear-gradient(to bottom, rgba(#27282a,1) 0%, rgba(#27282a,1) 50%, rgba(#252527,1) 51%, rgba(#252527,1) 100%));
+    border-top: 1px solid #393a3c;
+    border-bottom: 1px solid #1d1b19;
+    &.prev, &.next {
+      text-align: center;
+    }
+    &.prev {
+      border-right: 1px solid #343436;
+    }
+    &.next {
+      border-left: 1px solid #343436;
+    }
+    &.middle {
+      @include flex(100 100 1px);
+      @include display-flex();
+      @include justify-content(space-between);
+      @include flex-flow(column nowrap);
+      @include align-items(center);
+      
+      span {
+        @include flex(0 0 35px);
+        display: inline-block;
+        &.title {
+          color: #fff;
+          font-weight: 900;
+          line-height: 35px;
+        }
+        &.timeDisplay {
+          color: #999;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}
+
+.progress {
+  background: #888;
+  width: 100%;
+  position: relative;
+  height: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 0;
+}
+
+.progress > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.progress-time {
+  @include background(linear-gradient(to bottom, rgba(#e73e4a,1) 0%, rgba(#c63a44,1) 100%));
+}
+
+.anim {
+  @include transition(width 1000ms linear);
+}
+
+.progress-buffer {
+  background-color: #000;
+  @include transition(width 250ms linear);
+}
+
+.gutter {
+  @include flex(1 1 50px);
+}
+
+.bx-wrapper, .wrapper {
+  border-top: 1px solid rgba(#fff, .5);
+}
+
+@media only screen and (max-width : 480px) {
+  .gutter, .bx-wrapper {
+    display: none;
+  }
+  h1 {
+    font-size: 5vw;
+  }
+}
+.bx-wrapper {
+  @include flex(0 1 200px);
+  box-shadow: 0 0 50px rgba($shadowBaseColor, .8);
+  position: relative;
+
+  .bx-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: #252527;
+    border-top: 1px solid #393a3c;
+    border-bottom: 1px solid #1d1b19;
+    .bx-prev, .bx-next {
+      position: absolute;
+      font-size: 0;
+      text-decoration: none;
+      color: #fff;
+      width: 50%;
+      height: 100%;
+      @include transition(background 0.3s linear);
+      &:hover {
+        background: rgba(#000, .5);
+      }
+    }
+    .bx-prev {
+    }
+    .bx-next {
+      right: 0;
+      background: #27282a;
+    }
+  }
+  .bx-viewport {
+    overflow: hidden;
+  }
+  .bx-viewport, .playList {
+    position: absolute !important;
+    height: 100% !important;
+  }
+  .playList {
+    @include display-flex();
+    @include flex-direction(column);
+    a {
+      @include flex(0 0 33%);
+      display: inline-block;
+      background-size: cover;
+      background-position: center center;
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      font-size: 15px;
+      text-shadow: 1px 1px 0 rgba(#000, 1);
+      line-height: 1.5;
+      font-weight: 300;
+      &:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(#000, .5);
+        @include transition(background 0.5s linear);
+      }
+      &:hover, &.active {
+        &:before {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+}
